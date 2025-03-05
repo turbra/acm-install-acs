@@ -104,3 +104,10 @@ A subscription to this repo might look like this:
         matchLabels:
           name: local-cluster
 ```
+
+> 💡Note: 
+your clusters will require the appropriate labels if using the subscription example included above
+
+```
+oc label managedcluster local-cluster app=acs-install-policies
+```
