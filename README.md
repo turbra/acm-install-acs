@@ -35,7 +35,7 @@ Notes:
       name: 'system:image-puller'
 ```
 A subscription to this repo might look like this:
-
+```yaml
     apiVersion: v1
     kind: Namespace
     metadata:
@@ -97,3 +97,4 @@ A subscription to this repo might look like this:
       clusterSelector:
         matchLabels:
           name: local-cluster
+```
