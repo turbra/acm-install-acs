@@ -3,21 +3,27 @@ Deploy ACS to ACM hub and managed clusters using ACM policygenerator
 
 Notes:
 - User needs to be added to open-cluster-management:subscription-admin ClusterRoleBinding
-
-```yaml
-    kind: ClusterRoleBinding  
-    apiVersion: rbac.authorization.k8s.io/v1  
-    metadata:  
-      name: 'open-cluster-management:subscription-admin'
-    subjects:
-      - kind: User
-        apiGroup: rbac.authorization.k8s.io
-        name: admin
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: 'open-cluster-management:subscription-admin'
 ```
+  oc patch clusterrolebinding open-cluster-management:subscription-admin --type merge -p '{"subjects": [{"kind": "User", "apiGroup": "rbac.authorization.k8s.io", "name": "admin"}]}'
+```
+```
+oc get clusterrolebinding open-cluster-management:subscription-admin -o yaml
+```
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: open-cluster-management:subscription-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: open-cluster-management:subscription-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: admin
+```
+
 - Add user to system:image-puller role for project
 
 ```yaml
