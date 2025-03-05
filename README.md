@@ -72,7 +72,7 @@ A subscription to this repo might look like this:
       namespace: acs-install-policies
     spec:
       type: Git
-      pathname: https://github.com/skylarscaling/acm-install-acs.git
+      pathname: https://github.com/turbra/acm-install-acs.git
     ---
     apiVersion: apps.open-cluster-management.io/v1
     kind: Subscription
