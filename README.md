@@ -6,6 +6,10 @@ Notes:
 ```
 oc patch clusterrolebinding open-cluster-management:subscription-admin --type merge -p '{"subjects": [{"kind": "User", "apiGroup": "rbac.authorization.k8s.io", "name": "admin"}]}'
 ```
+- If you plan on using ArgoCD to deploy, you'll need to add the following service account
+```
+oc patch clusterrolebinding open-cluster-management:subscription-admin --type merge -p '{"subjects": [{"kind": "User", "apiGroup": "rbac.authorization.k8s.io", "name": " system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller"}]}'
+```
 ```
 oc get clusterrolebinding open-cluster-management:subscription-admin -o yaml
 ```
