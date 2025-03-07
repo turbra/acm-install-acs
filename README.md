@@ -51,3 +51,9 @@ This guide explains how Red Hat Advanced Cluster Security (ACS) is deployed usin
    - ACM tracks policy compliance for each cluster (Compliant/NonCompliant).  
    - If any cluster drifts from the desired state, ACM enforces the policy (reinstalling or correcting missing resources).  
    - ACS itself provides UI, runtime checks, and advanced security monitoring once up and running.
+
+> 💡Note: labels are required
+ ```
+oc label node<node-name> node-role.kubernetes.io/infra=""
+oc label managedcluster local-cluster app=acs-install-policies
+```
