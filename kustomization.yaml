@@ -8,5 +8,5 @@ resources:
 generators:
   - policyGenerator.yaml
 
-labels:
+commonLabels:
   open-cluster-management.io/policy-set: openshift-acs-install
