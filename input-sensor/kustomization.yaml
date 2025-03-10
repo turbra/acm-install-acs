@@ -1,4 +1,4 @@
 generators:
 - ./policyGenerator.yaml
-commonLabels:
+labels:
   open-cluster-management.io/policy-set: acs-sensors
