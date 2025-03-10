@@ -6,16 +6,16 @@ placementBindingDefaults:
   name: binding-secured-clusters
 policyDefaults:
   categories:
-    - "SI System and Information Integrity"
+    - SI System and Information Integrity
   controls: 
-    - "SI-5 Security Alerts Advisories and Directives"
+    - SI-5 Security Alerts Advisories and Directives
   namespace: policies
   policySets:
     - acs-sensors-hub-info
   remediationAction: enforce
   severity: medium
   standards:
-    - "NIST SP 800-53"
+    - NIST SP 800-53
 policies:
   - name: policy-acs-sync-resources
     consolidateManifests: false
@@ -35,27 +35,14 @@ policies:
     policySets:
       - acs-sensor-clusters
 policySets:
-  - description: >
-      The Advanced Cluster Security components to setup the hub for securing each managed cluster.
+  - description: The Advanced Cluster Security components to setup the hub for securing each managed cluster.
     name: acs-sensors-hub-info
     placement:
       labelSelector:
-        matchExpressions:
-          - key: "local-cluster"
-            operator: In
-            values:
-              - "true"
-  - description: >
-      The Advanced Cluster Security components distributed to all OpenShift managed clusters to secure the clusters.
+        matchExpressions: '[{"key": "local-cluster", "operator": "In", "values": ["true"]}]'
+  - description: The Advanced Cluster Security components distributed to all OpenShift managed clusters to secure the clusters.
     name: acs-sensor-clusters
     placement:
       labelSelector:
-        matchExpressions:
-          - key: vendor
-            operator: In
-            values:
-              - "OpenShift"
-          - key: "local-cluster"
-            operator: NotIn
-            values:
-              - "true"
+        matchExpressions: '[{"key": "vendor", "operator": "In", "values": ["OpenShift"]}, {"key": "local-cluster", "operator": "NotIn", "values": ["true"]}]'
+
