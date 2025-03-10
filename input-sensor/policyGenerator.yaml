@@ -20,17 +20,17 @@ policies:
 - name: policy-acs-sync-resources
   consolidateManifests: false
   manifests:
-    - path: input-sensor/policy-acs-sync-resources.yaml
+    - path: policy-acs-sync-resources.yaml
 - name: policy-acs-monitor-certs
   dependencies:
     - name: policy-acs-sync-resources
   manifests:
-    - path: input-sensor/acs-check-certificates.yaml
+    - path: acs-check-certificates.yaml
 - name: policy-advanced-managed-cluster-security
   consolidateManifests: false
   manifests:
-    - path: input-sensor/policy-advanced-managed-cluster-security.yaml
-    - path: input-sensor/policy-advanced-managed-cluster-status.yaml
+    - path: policy-advanced-managed-cluster-security.yaml
+    - path: policy-advanced-managed-cluster-status.yaml
       remediationAction: informOnly
   policySets:
     - acs-sensor-clusters
