@@ -41,12 +41,21 @@ policySets:
     placement:
       labelSelector:
         matchExpressions:
-          - {key: "local-cluster", operator: In, values: ["true"]}
+          - key: "local-cluster"
+            operator: In
+            values:
+              - "true"
   - description: The Advanced Cluster Security components distributed to all OpenShift
       managed clusters to secure the clusters.
     name: acs-sensor-clusters
     placement:
       labelSelector:
         matchExpressions:
-          - {key: vendor, operator: In, values: ["OpenShift"]}
-          - {key: "local-cluster", operator: NotIn, values: ["true"]}
+          - key: vendor
+            operator: In
+            values:
+              - "OpenShift"
+          - key: "local-cluster"
+            operator: NotIn
+            values:
+              - "true"
