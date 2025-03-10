@@ -4,7 +4,7 @@ metadata:
   name: acs-bundle-certificates
 spec:
   namespaceSelector:
-    include: ["acm-install-policies"]
+    include: ["policies"]
   remediationAction: inform
   severity: high
   minimumDuration: 720h

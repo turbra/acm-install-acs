@@ -21,17 +21,14 @@ metadata:
   name: rhacs-operator
   namespace: rhacs-operator
 spec:
-  channel: rhacs-4.5
+  channel: stable
   installPlanApproval: Automatic
   name: rhacs-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
 ---
 apiVersion: v1
-data:
-  admission-control-cert.pem: '{{hub fromSecret "acm-install-policies" "admission-control-tls" "admission-control-cert.pem" hub}}'
-  admission-control-key.pem: '{{hub fromSecret "acm-install-policies" "admission-control-tls" "admission-control-key.pem" hub}}'
-  ca.pem: '{{hub fromSecret "acm-install-policies" "admission-control-tls" "ca.pem" hub}}'
+data: '{{hub copySecretData "policies" "admission-control-tls" hub}}'
 kind: Secret
 metadata:
   name: admission-control-tls
@@ -39,10 +36,7 @@ metadata:
 type: Opaque
 ---
 apiVersion: v1
-data:
-  collector-cert.pem: '{{hub fromSecret "acm-install-policies" "collector-tls" "collector-cert.pem" hub}}'
-  collector-key.pem: '{{hub fromSecret "acm-install-policies" "collector-tls" "collector-key.pem" hub}}'
-  ca.pem: '{{hub fromSecret "acm-install-policies" "collector-tls" "ca.pem" hub}}'
+data: '{{hub copySecretData "policies" "collector-tls" hub}}'
 kind: Secret
 metadata:
   name: collector-tls
@@ -50,11 +44,7 @@ metadata:
 type: Opaque
 ---
 apiVersion: v1
-data:
-  sensor-cert.pem: '{{hub fromSecret "acm-install-policies" "sensor-tls" "sensor-cert.pem" hub}}'
-  sensor-key.pem: '{{hub fromSecret "acm-install-policies" "sensor-tls" "sensor-key.pem" hub}}'
-  ca.pem: '{{hub fromSecret "acm-install-policies" "sensor-tls" "ca.pem" hub}}'
-  acs-host: '{{hub fromSecret "acm-install-policies" "sensor-tls" "acs-host" hub}}'
+data: '{{hub copySecretData "policies" "sensor-tls" hub}}'
 kind: Secret
 metadata:
   name: sensor-tls
@@ -67,12 +57,10 @@ metadata:
   namespace: stackrox
   name: stackrox-secured-cluster-services
 spec:
-  clusterName: |
-    {{ fromClusterClaim "name" }}
+  clusterName: '{{hub .ManagedClusterName hub}}'
   auditLogs:
     collection: Auto
-  centralEndpoint: |
-    {{ fromSecret "stackrox" "sensor-tls" "acs-host" | base64dec }}
+  centralEndpoint: '{{hub fromConfigMap "" "acs-config" "acs-host" hub}}'
   admissionControl:
     listenOnCreates: false
     listenOnEvents: true
