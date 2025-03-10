@@ -1,4 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
 generators:
-- ./policyGenerator.yaml
-labels:
+  - ./policyGenerator.yaml
+commonlabels:
   open-cluster-management.io/policy-set: acs-sensors
